@@ -9,13 +9,9 @@ import redis.clients.jedis.Jedis;
 
 public class ConnectionManager {
 
-    private String serverIp;
-    private int serverPort;
     private Jedis client;
 
     public ConnectionManager(String serverIp, int serverPort) {
-        this.serverIp = serverIp;
-        this.serverPort = serverPort;
         client = new Jedis(serverIp, serverPort);
     }
 
