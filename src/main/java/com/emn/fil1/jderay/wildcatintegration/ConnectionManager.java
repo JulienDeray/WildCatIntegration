@@ -30,4 +30,8 @@ public class ConnectionManager {
     public String get(String key) {
         return client.get(key);
     }
+    
+    public boolean sequenceIsPresent() {
+        return !get("sequence").isEmpty() ? true : false;
+    }
 }
