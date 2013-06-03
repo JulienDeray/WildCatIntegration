@@ -35,7 +35,7 @@ public class RedisTest extends TestCase {
         assertTrue( manager.isConnected() );
     }
     
-    public void testSet() {
+    public void testGet() {
         ConnectionManager manager = new ConnectionManager("172.17.2.138", 6379);
         manager.insert("test", "OK");
         assertEquals( manager.get("test"), "OK" );
