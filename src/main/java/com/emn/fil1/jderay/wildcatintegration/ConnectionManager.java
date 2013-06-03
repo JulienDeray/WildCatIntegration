@@ -34,4 +34,16 @@ public class ConnectionManager {
     public boolean sequenceIsPresent() {
         return !get("sequence").isEmpty() ? true : false;
     }
+    
+    public ServerLogs getLogs(int sequence) {
+        return sequenceIsPresent() ? 
+                new ServerLogs(
+                    sequence,
+                    get(sequence + ":requestDate"),
+                    get(sequence + ":url"),
+                    get(sequence + ":returnedCode"),
+                    get(sequence + ":machineName"),
+                    get(sequence + ":requestTime"))
+           : null;
+    }
 }
