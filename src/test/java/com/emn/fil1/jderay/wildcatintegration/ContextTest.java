@@ -1,17 +1,12 @@
 package com.emn.fil1.jderay.wildcatintegration;
 
-import com.emn.fil1.jderay.wildcatintegration.wildcat.WSContext;
+import com.emn.fil1.jderay.wildcatintegration.wildcat.ContextManager;
 import junit.framework.TestCase;
 import org.ow2.wildcat.ContextException;
+import org.ow2.wildcat.Context;
 
 import java.util.Set;
 
-/**
- * User: jonathan
- * Date: 04/06/13
- * Time: 14:06
- * To change this template use File | Settings | File Templates.
- */
 public class ContextTest extends TestCase {
 
     public ContextTest(String testName){
@@ -29,20 +24,19 @@ public class ContextTest extends TestCase {
     }
 
     public void testCreateContext(){
-        WSContext wsc = new WSContext("WSListTest.properties");
+        Context ctx = ContextManager.createContext("WSListTest.properties");
         try {
-            Set<String> resources = wsc.getCtx().list("self://webservice/");
+            Set<String> resources = ctx.list("self://webservice/");
             assertTrue(resources.contains("machine1") && resources.contains("machine2"));
 
-            Set<String> attributes = (wsc.getCtx().list("self://webservice/machine1"));
+            Set<String> attributes = ctx.list("self://webservice/machine1");
             assertTrue(attributes.contains("#requestTime") &&
-                    attributes.contains("#machineName") &&
                     attributes.contains("#requestDate") &&
                     attributes.contains("#returnedCode") &&
                     attributes.contains("#url"));
         } catch (ContextException e) {
             fail();
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
