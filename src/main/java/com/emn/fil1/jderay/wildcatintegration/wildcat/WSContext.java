@@ -1,4 +1,4 @@
-package com.emn.fil1.jderay.wildcatintegration;
+package com.emn.fil1.jderay.wildcatintegration.wildcat;
 
 import org.ow2.wildcat.Context;
 import org.ow2.wildcat.ContextException;

@@ -1,5 +1,6 @@
 package com.emn.fil1.jderay.wildcatintegration;
 
+import com.emn.fil1.jderay.wildcatintegration.wildcat.WSContext;
 import junit.framework.TestCase;
 import org.ow2.wildcat.ContextException;
 

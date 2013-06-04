@@ -2,7 +2,7 @@
  * @author julien
  */
 
-package com.emn.fil1.jderay.wildcatintegration;
+package com.emn.fil1.jderay.wildcatintegration.logs;
 
 
 public class ServerLogs {
@@ -46,6 +46,15 @@ public class ServerLogs {
     public String getRequestTime() {
         return requestTime;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Sequence : " + sequence + "\n"
+                + "requestDate : " + requestDate + "\n"
+                + "url : " + url + "\n"
+                + "returndCode : " + returnedCode + "\n"
+                + "machineName : " + machineName + "\n"
+                + "requestTime : " + requestTime;
+    }
+    
 }
