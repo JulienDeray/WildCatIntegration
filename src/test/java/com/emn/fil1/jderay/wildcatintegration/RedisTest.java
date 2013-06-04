@@ -29,14 +29,14 @@ public class RedisTest extends TestCase {
     }
     
     public void testConnection() {
-        ConnectionManager manager = new ConnectionManager("172.17.2.138", 6379);
+        LogsManager manager = new LogsManager("172.17.2.138", 6379);
         // on insère une valeur pour établir la connexion avec Redis
         manager.insert("connection", "yes");
         assertTrue( manager.isConnected() );
     }
     
     public void testGet() {
-        ConnectionManager manager = new ConnectionManager("172.17.2.138", 6379);
+        LogsManager manager = new LogsManager("172.17.2.138", 6379);
         manager.insert("test", "OK");
         assertEquals( manager.get("test"), "OK" );
     }

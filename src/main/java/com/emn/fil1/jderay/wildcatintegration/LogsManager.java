@@ -7,11 +7,11 @@ package com.emn.fil1.jderay.wildcatintegration;
 import redis.clients.jedis.Jedis;
 
 
-public class ConnectionManager {
+public class LogsManager {
 
     private Jedis client;
 
-    public ConnectionManager(String serverIp, int serverPort) {
+    public LogsManager(String serverIp, int serverPort) {
         client = new Jedis(serverIp, serverPort);
     }
 
