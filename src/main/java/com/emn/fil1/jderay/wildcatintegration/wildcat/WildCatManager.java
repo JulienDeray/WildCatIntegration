@@ -23,7 +23,7 @@ public class WildCatManager {
     }
     
     public void pushLogs(ServerLogs logs) {
-        String pathToWebservice = "self://webservice" + logs.getMachineName();
+        String pathToWebservice = "self://webservice/" + logs.getMachineName();
         try {
             context.setValue(pathToWebservice + "#requestDate", logs.getRequestDate());
             context.setValue(pathToWebservice + "#url", logs.getUrl());
