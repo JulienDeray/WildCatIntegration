@@ -28,7 +28,7 @@
     </dependency>
     <dependency>
       <groupId>org.ow2.wildcat</groupId>
-      <artifactId>wildcat-core</artifactId>
+      <artifactId>wildcat</artifactId>
       <version>2.3.0</version>
     </dependency>
   </dependencies>
