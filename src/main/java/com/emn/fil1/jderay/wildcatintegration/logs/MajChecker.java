@@ -23,7 +23,7 @@ public class MajChecker implements Runnable {
             checkSequence();
             
             try {
-                Thread.sleep(10 * 1000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("--- Stop listening Redis ---");
                 break;
