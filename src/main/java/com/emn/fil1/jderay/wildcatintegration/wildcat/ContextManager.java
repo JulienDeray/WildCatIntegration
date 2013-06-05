@@ -34,7 +34,7 @@ public class ContextManager {
                 context.createAttribute("self://webservices/" + nameWS[i] + "#returnedCode", "");
                 context.createAttribute("self://webservices/" + nameWS[i] + "#requestTime", "");
 
-                Query query = context.createQuery("select avg(rt) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#responseTime').win:time_batch(1min) as rt having ( avg(rt) > 10)");
+                Query query = context.createQuery("select avg(cast(rt.value?,int)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#responseTime').win:time_batch(1min) as rt having ( avg(cast(rt.value?,int)) > 10)");
                 WAction action = new WAction() {
                     public void onEvent() {
                         System.out.println("Violation !!!");
