@@ -9,8 +9,7 @@ import com.emn.fil1.jderay.wildcatintegration.wildcat.WildCatManager;
  */
 public class App {
     public static void main( String[] args ) {
-        ContextManager.createContext("config.properties");
-        WildCatManager wildCatManager = new WildCatManager();
+        WildCatManager wildCatManager = new WildCatManager("config.properties");
         
     }
 }

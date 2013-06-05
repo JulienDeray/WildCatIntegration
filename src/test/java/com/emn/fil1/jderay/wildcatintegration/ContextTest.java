@@ -26,10 +26,10 @@ public class ContextTest extends TestCase {
     public void testCreateContext(){
         Context ctx = ContextManager.createContext("WSListTest.properties");
         try {
-            Set<String> resources = ctx.list("self://webservice/");
+            Set<String> resources = ctx.list("self://webservices/");
             assertTrue(resources.contains("machine1") && resources.contains("machine2"));
 
-            Set<String> attributes = ctx.list("self://webservice/machine1");
+            Set<String> attributes = ctx.list("self://webservices/machine1");
             assertTrue(attributes.contains("#requestTime") &&
                     attributes.contains("#requestDate") &&
                     attributes.contains("#returnedCode") &&

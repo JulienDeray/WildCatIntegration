@@ -1,8 +1,6 @@
 package com.emn.fil1.jderay.wildcatintegration.wildcat;
 
-import org.ow2.wildcat.Context;
-import org.ow2.wildcat.ContextException;
-import org.ow2.wildcat.ContextFactory;
+import org.ow2.wildcat.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,44 +8,49 @@ import java.util.Properties;
 
 public class ContextManager {
 
-    static Context ctx;
+    static Context context;
 
     public static Context createContext(String propertyFileName) {
-         /*
+        /*
          * Creating a context through the ContextFactory
-		 */
-        ctx = ContextFactory.getDefaultFactory().createContext("ContextManager");
+         */
+        context = ContextFactory.getDefaultFactory().createContext("ContextManager");
         try {
-            try {
-                InputStream in =
-                        ContextManager.class.getClassLoader().getResourceAsStream(propertyFileName);
-                Properties p = new Properties();
-                p.load(in);
-                String[] nameWS = p.getProperty("WSNames").split(";");
-                for (int i = 0; i < nameWS.length; i++) {
+            InputStream in =
+                    ContextManager.class.getClassLoader().getResourceAsStream(propertyFileName);
+            Properties p = new Properties();
+            p.load(in);
+            String[] nameWS = p.getProperty("WSNames").split(";");
+            for (int i = 0; i < nameWS.length; i++) {
                 /*
-                * Creating some resource
+                 * Creating some resource
                  */
-                    ctx.createResource("self://webservice/" + nameWS[i]);
+                context.createResource("self://webservices/" + nameWS[i]);
                 /*
-			    * Creating and initializing attributes
-			    */
-                    ctx.createAttribute("self://webservice/" + nameWS[i] + "#requestDate", "");
-                    ctx.createAttribute("self://webservice/" + nameWS[i] + "#url", "");
-                    ctx.createAttribute("self://webservice/" + nameWS[i] + "#returnedCode", "");
-                    ctx.createAttribute("self://webservice/" + nameWS[i] + "#requestTime", "");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                 * Creating and initializing attributes
+                 */
+                context.createAttribute("self://webservices/" + nameWS[i] + "#requestDate", "");
+                context.createAttribute("self://webservices/" + nameWS[i] + "#url", "");
+                context.createAttribute("self://webservices/" + nameWS[i] + "#returnedCode", "");
+                context.createAttribute("self://webservices/" + nameWS[i] + "#requestTime", "");
+
+                Query query = context.createQuery("select avg(rt) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#responseTime').win:time_batch(1min) as rt having ( avg(rt) > 10)");
+                WAction action = new WAction() {
+                    public void onEvent() {
+                        System.out.println("Violation !!!");
+                    }
+                };
+                context.registerActions(query, action);
+
             }
-        } catch (ContextException e) {
+        } catch (IOException | ContextException e) {
             e.printStackTrace();
         }
 
-        return ctx;
+        return context;
     }
 
-    public static Context getCtx() {
-        return ctx;
+    public static Context getContext() {
+        return context;
     }
 }
