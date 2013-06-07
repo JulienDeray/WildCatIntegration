@@ -43,8 +43,8 @@ public class ServerLogs {
         return machineName;
     }
 
-    public String getRequestTime() {
-        return requestTime;
+    public int getRequestTime() {
+        return Integer.parseInt(requestTime);
     }
 
     @Override
