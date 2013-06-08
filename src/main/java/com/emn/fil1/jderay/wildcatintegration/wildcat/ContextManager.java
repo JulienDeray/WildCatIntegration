@@ -32,19 +32,22 @@ public class ContextManager {
                 context.createAttribute("self://webservices/" + nameWS[i] + "#requestDate", "");
                 context.createAttribute("self://webservices/" + nameWS[i] + "#url", "");
                 context.createAttribute("self://webservices/" + nameWS[i] + "#returnedCode", "");
-                context.createAttribute("self://webservices/" + nameWS[i] + "#requestTime", "");
+                context.createAttribute("self://webservices/" + nameWS[i] + "#requestTime", 0);
 
-                Query query = context.createQuery("select avg(cast(rt.value?,int)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#responseTime').win:time_batch(1min) as rt having ( avg(cast(rt.value?,int)) > 10)");
+                //Query query = context.createQuery("select avg(cast(value?,double)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#requestTime').win:time_batch(10sec) as rt");
+                  Query query = context.createQuery("select avg(cast(value?,double)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#requestTime').win:time_batch(10sec) as rt having ( avg(cast(value?,double))  > 2000)");
+                
                 WAction action = new WAction() {
+                    @Override
                     public void onEvent() {
-                        System.out.println("Violation !!!");
+                        double workload = (Double) getListener().getNewEvents()[0].get("avgRT");
+                        System.out.println("Violation !!!\nAverage request time : " + workload + " ms");
                     }
                 };
                 context.registerActions(query, action);
 
             }
         } catch (IOException | ContextException e) {
-            e.printStackTrace();
         }
 
         return context;

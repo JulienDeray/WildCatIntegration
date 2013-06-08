@@ -8,7 +8,6 @@ import com.emn.fil1.jderay.wildcatintegration.logs.ServerLogs;
 import com.emn.fil1.jderay.wildcatintegration.logs.LogsManager;
 import org.ow2.wildcat.Context;
 import org.ow2.wildcat.ContextException;
-import org.ow2.wildcat.Query;
 
 
 public class WildCatManager {
@@ -17,7 +16,8 @@ public class WildCatManager {
 
     public WildCatManager(String propertiesFile) {
         ContextManager.createContext(propertiesFile);
-        LogsManager logsManager = new LogsManager("172.17.2.138", 6379);
+        //LogsManager logsManager = new LogsManager("172.17.2.138", 6379);
+        LogsManager logsManager = new LogsManager("192.168.43.105", 6379);
         logsManager.listen(this);
         logsManager.launchMajChecker();
 
@@ -25,7 +25,7 @@ public class WildCatManager {
     }
     
     public void pushLogs(ServerLogs logs) {
-        String pathToWebservice = "self://webservice/" + logs.getMachineName();
+        String pathToWebservice = "self://webservices/" + logs.getMachineName();
         try {
             context.setValue(pathToWebservice + "#requestDate", logs.getRequestDate());
             context.setValue(pathToWebservice + "#url", logs.getUrl());

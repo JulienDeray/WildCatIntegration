@@ -19,7 +19,6 @@ public class MajChecker implements Runnable {
     public void run() {
         System.out.println("--- Start listening Redis ---");
         while (true) {
-            System.out.println( sequence );
             checkSequence();
             
             try {

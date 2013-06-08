@@ -17,7 +17,7 @@ public class LogsManager {
     
     public LogsManager(String serverIp, int serverPort) {
         client = new Jedis(serverIp, serverPort);
-        listeners = new ArrayList<WildCatManager>();
+        listeners = new ArrayList<>();
     }
 
     public void listen( WildCatManager listener ) {
