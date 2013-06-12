@@ -46,9 +46,16 @@ public class LogsManager {
     }
     
     private boolean parasite( int sequence ) {
-        if ( client.get(sequence + ":url").equals("-") )
+        if ( client.get(sequence + ":url").equals("-") ) {
             return false;
+        }
         else
+            try {
+                String requestTime = client.get( sequence + ":requestTime" );
+                int res = (int) (Double.parseDouble(requestTime) * 1000);
+            } catch (Exception e) {
+                return false;
+            }
             return true;
     }
     
