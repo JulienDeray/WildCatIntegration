@@ -35,7 +35,7 @@ public class ContextManager {
                 context.createAttribute("self://webservices/" + nameWS[i] + "#requestTime", 0);
 
                 //Query query = context.createQuery("select avg(cast(value?,double)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#requestTime').win:time_batch(10sec) as rt");
-                  Query query = context.createQuery("select avg(cast(value?,double)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#requestTime').win:time_batch(10sec) as rt having ( avg(cast(value?,double))  > 2000)");
+                  Query query = context.createQuery("select avg(cast(value?,double)) as avgRT from WAttributeEvent(source like 'self://webservices/" + nameWS[i] + "#requestTime').win:time_batch(10sec) as rt having ( avg(cast(value?,double))  > 1000)");
                 
                 WAction action = new WAction() {
                     @Override

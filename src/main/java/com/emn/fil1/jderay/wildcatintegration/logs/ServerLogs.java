@@ -44,7 +44,7 @@ public class ServerLogs {
     }
 
     public int getRequestTime() {
-        return Integer.parseInt(requestTime);
+        return (int) (Double.parseDouble(requestTime) * 1000);
     }
 
     @Override

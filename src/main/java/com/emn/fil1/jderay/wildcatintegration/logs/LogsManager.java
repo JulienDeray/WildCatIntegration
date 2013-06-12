@@ -38,9 +38,18 @@ public class LogsManager {
     }
     
     void fireLogs( int sequence ) {
-        for ( WildCatManager listener : listeners ) {
-            listener.pushLogs( makeLogs( sequence ) );
+        if ( parasite( sequence ) ) {
+            for ( WildCatManager listener : listeners ) {
+                listener.pushLogs( makeLogs( sequence ) );
+            }
         }
+    }
+    
+    private boolean parasite( int sequence ) {
+        if ( client.get(sequence + ":url").equals("-") )
+            return false;
+        else
+            return true;
     }
     
     private ServerLogs makeLogs( int sequence ) {

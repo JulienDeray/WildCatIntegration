@@ -16,8 +16,7 @@ public class WildCatManager {
 
     public WildCatManager(String propertiesFile) {
         ContextManager.createContext(propertiesFile);
-        //LogsManager logsManager = new LogsManager("172.17.2.138", 6379);
-        LogsManager logsManager = new LogsManager("192.168.43.105", 6379);
+        LogsManager logsManager = new LogsManager("172.17.2.88", 6379);
         logsManager.listen(this);
         logsManager.launchMajChecker();
 
