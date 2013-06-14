@@ -41,7 +41,7 @@ public class ContextManager {
                     @Override
                     public void onEvent() {
                         double workload = (Double) getListener().getNewEvents()[0].get("avgRT");
-                        System.out.println("Violation !!!\nAverage request time : " + workload + " ms");
+                        System.err.println("Violation !!!\nAverage request time : " + workload + " ms");
                     }
                 };
                 context.registerActions(query, action);
